@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs", /* Specify what module code is generated. */
+    "outDir": "./Website",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true
+  },
+  "files": [
+    "UIElements/panel.ts",
+    "UIElements/element.ts",
+    "UIElements/button.ts",
+    "UIElements/control.ts",
+    "UIElements/selectbox.ts",
+    "UIElements/textinput.ts",
+    "UIElements/gestures.ts",
+    "UIElements/image.ts",
+    "UIElements/labelpanel.ts",
+    "data.ts",
+    "volledigscherm.ts",
+    "lijst.ts",
+    "lijstheader.ts",
+    "document.ts",
+    "pagina.ts",
+    "documentmenu.ts",
+    "main.ts",
+    "index.ts",
+    "config.ts",
+    "procs.ts"
+  ]
+}  
