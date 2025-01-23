@@ -1,0 +1,20 @@
+.vs/
+UIElements/panel.ts.bak
+Website/UIElements/
+Website/config strato.js
+Website/config.js
+Website/data.js
+Website/data/
+Website/document.js
+Website/documentmenu.js
+Website/index.js
+Website/lijst.js
+Website/lijstheader.js
+Website/main.js
+Website/menu.js
+Website/pagina.js
+Website/procs.js
+Website/volledigscherm.js
+node_modules/
+package-lock.json
+package.json
