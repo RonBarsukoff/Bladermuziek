@@ -1,15 +1,19 @@
 {
-  "name": "Protect Main Branch",
-  "rules": [
+  "rulesets": [
     {
-      "enabled": true,
-      "name": "Require pull request reviews before merging",
+      "name": "Protect Main Branch",
+      "target": "branches",
       "conditions": {
-        "match": "main"
+        "name_pattern": "main",
+        "exclude": []
       },
-      "settings": {
-        "required_approving_review_count": 1
-      }
+      "enforcement": "active", 
+      "rules": [
+        {
+          "required_approving_review_count": 1,
+          "restrict_push_access": true
+        }
+      ]
     }
   ]
 }
