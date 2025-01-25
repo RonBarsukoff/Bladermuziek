@@ -1,14 +1,16 @@
 {
   "name": "Protect Main Branch",
   "enforcement": "active",
-  "target": "branch",
+  "target": "branches",
   "conditions": {
     "name_pattern": "main"
   },
   "rules": [
     {
-      "required_approving_review_count": 1,
-      "restrict_push_access": true
+      "required_pull_request_reviews": {
+        "required_approving_review_count": 1
+      },
+      "restrict_pushes": true
     }
   ]
 }
