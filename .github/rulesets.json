@@ -3,7 +3,9 @@
   "enforcement": "active",
   "target": "branch",
   "conditions": {
-    "name_pattern": "main"
+    "ref_name": {
+      "include": ["~DEFAULT_BRANCH"]
+    }
   },
   "rules": [
     {
