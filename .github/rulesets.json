@@ -1,19 +1,14 @@
 {
-  "rulesets": [
+  "name": "Protect Main Branch",
+  "enforcement": "active",
+  "target": "branches",
+  "conditions": {
+    "name_pattern": "main"
+  },
+  "rules": [
     {
-      "name": "Protect Main Branch",
-      "target": "branches",
-      "conditions": {
-        "name_pattern": "main",
-        "exclude": []
-      },
-      "enforcement": "active", 
-      "rules": [
-        {
-          "required_approving_review_count": 1,
-          "restrict_push_access": true
-        }
-      ]
+      "required_approving_review_count": 1,
+      "restrict_push_access": true
     }
   ]
 }
