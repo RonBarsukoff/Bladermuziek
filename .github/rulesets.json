@@ -1,7 +1,7 @@
 {
   "name": "Protect Main Branch",
   "enforcement": "active",
-  "target": "branches",
+  "target": "branch",
   "conditions": {
     "name_pattern": "main"
   },
