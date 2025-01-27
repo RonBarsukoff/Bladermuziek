@@ -28,4 +28,13 @@ jobs:
           npm install  # Install dependencies
 
   compile:
-    runs-on: ubuntu-lates
+    runs-on: ubuntu-latest
+    needs: [checkout, install]  # Compile job depends on both checkout and install jobs
+    steps:
+      - name: Compile TypeScript files
+        run: |
+          npx tsc --pretty --noEmit  # This checks for TypeScript errors without emitting the files
+          
+      - name: List all JavaScript files
+        run: |
+          find . -name "*.js"  # Print all .js files in the repository
