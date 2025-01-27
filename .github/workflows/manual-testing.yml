@@ -22,7 +22,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'  # Specify Node version
+          node-version: '14'  # Specify Node version
 
       - name: Initialize npm and create package.json
         run: |
@@ -32,15 +32,22 @@ jobs:
         run: |
           npm install typescript --save-dev  # Add TypeScript as a dev dependency
 
+      - name: Add build script to package.json
+        run: |
+          jq '.scripts.build = "tsc"' package.json > temp.json && mv temp.json package.json  # Add the "build" script to package.json
+
       - name: Install dependencies
         run: |
           npm install  # Install dependencies from the dynamically created package.json
-
 
   compile:
     runs-on: ubuntu-latest
     needs: [checkout, install]  # Compile job depends on both checkout and install jobs
     steps:
+      - name: List TypeScript files
+        run: |
+          find . -name "*.ts"  # List all .ts files to ensure they exist
+
       - name: Compile TypeScript files
         run: |
           npx tsc --pretty --noEmit  # This checks for TypeScript errors without emitting the files
