@@ -4,7 +4,7 @@ on:
   workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
-  confirm-run:
+  install-run:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,3 +19,16 @@ jobs:
 
       - name: Confirm TypeScript Installation
         run: tsc --version  # Prints the TypeScript version to confirm it is installed
+
+  list-files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4  # Check out the repository’s code
+
+      - name: List files in the repository
+        run: |
+          echo "Listing files in the repository..."
+          ls -R  # List all files recursively
+    
