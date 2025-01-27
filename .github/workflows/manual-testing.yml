@@ -28,9 +28,14 @@ jobs:
         run: |
           npm init -y  # Automatically generate package.json with default values
 
+      - name: Install TypeScript
+        run: |
+          npm install typescript --save-dev  # Add TypeScript as a dev dependency
+
       - name: Install dependencies
         run: |
           npm install  # Install dependencies from the dynamically created package.json
+
 
   compile:
     runs-on: ubuntu-latest
