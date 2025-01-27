@@ -22,7 +22,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '14'  # Specify Node version
+          node-version: '22'  # Specify Node version
 
       - name: Initialize npm and create package.json
         run: |
@@ -42,15 +42,20 @@ jobs:
 
   compile:
     runs-on: ubuntu-latest
-    needs: [checkout, install]  # Compile job depends on both checkout and install jobs
+    needs: [checkout, install]  # Compile job depends on both checkout and install jobs    
     steps:
+      - name: Debug file locations
+        run: |
+          echo "Verifying repository contents before compiling:"
+          ls -R  # List all files to ensure TypeScript files are in place
+                
       - name: List TypeScript files
         run: |
           find . -name "*.ts"  # List all .ts files to ensure they exist
 
       - name: Compile TypeScript files
         run: |
-          npx tsc --project tsconfig.json --pretty --noEmit --verbose # Explicitly specify the tsconfig.json
+          npx tsc --project tsconfig.json --pretty --noEmit # Explicitly specify the tsconfig.json
           
       - name: List all JavaScript files
         run: |
