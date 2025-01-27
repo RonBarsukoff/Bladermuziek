@@ -38,7 +38,7 @@ jobs:
 
       - name: Compile TypeScript files
         run: |
-          npx tsc --pretty --noEmit --listFiles --verbose  # Compile with detailed logs
+          npx tsc --pretty --noEmit --listFiles  # Compile with detailed logs
 
       - name: List all JavaScript files
         run: |
