@@ -1,12 +1,21 @@
 name: Manual Workflow Test
 
 on:
-  workflow_dispatch: # Allows manual triggering
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
   confirm-run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Confirm Run
-        run: echo "The workflow ran successfully on the setting-up-tests-branch!"
+      - name: Set up Node.js
+        uses: actions/setup-node@v4.2.0  # Use the specific version (v4.2.0) of setup-node
+
+      - name: Confirm Node.js Installation
+        run: node -v  # Prints the Node.js version to confirm it is installed
+
+      - name: Install TypeScript
+        run: npm install -g typescript  # Installs TypeScript globally
+
+      - name: Confirm TypeScript Installation
+        run: tsc --version  # Prints the TypeScript version to confirm it is installed
