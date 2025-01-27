@@ -9,23 +9,28 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4  # Checkout the repository’s code
-      
+
       - name: List all files in the repository
         run: |
           echo "Listing all files in the repository"
-          ls -R  # Recursively list all files in the repository
+          ls -R  # List all files in the repository
 
   install:
     runs-on: ubuntu-latest
+    needs: checkout  # This job depends on the checkout job
     steps:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'  # Specify Node version
+          node-version: '14'  # Specify Node version
+
+      - name: Initialize npm and create package.json
+        run: |
+          npm init -y  # Automatically generate package.json with default values
 
       - name: Install dependencies
         run: |
-          npm install  # Install dependencies
+          npm install  # Install dependencies from the dynamically created package.json
 
   compile:
     runs-on: ubuntu-latest
