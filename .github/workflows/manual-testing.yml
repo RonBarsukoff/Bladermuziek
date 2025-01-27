@@ -28,7 +28,7 @@ jobs:
     steps:
       - name: Compile TypeScript files
         run: |
-          npx tsc  # Run TypeScript compiler (tsc) to compile .ts files into .js
+          npx tsc --pretty --noEmit  # This checks for TypeScript errors without emitting the files
           
       - name: List all JavaScript files
         run: |
