@@ -1,0 +1,12 @@
+name: Manual Workflow Test
+
+on:
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  confirm-run:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Confirm Run
+        run: echo "The workflow ran successfully!"
