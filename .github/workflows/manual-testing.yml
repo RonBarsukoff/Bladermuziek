@@ -50,7 +50,7 @@ jobs:
 
       - name: Compile TypeScript files
         run: |
-          npx tsc --pretty --noEmit  # This checks for TypeScript errors without emitting the files
+          npx tsc --project tsconfig.json --pretty --noEmit --verbose # Explicitly specify the tsconfig.json
           
       - name: List all JavaScript files
         run: |
