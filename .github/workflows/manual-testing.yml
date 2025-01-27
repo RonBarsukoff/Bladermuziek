@@ -8,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Checkout the repository’s code
+        uses: actions/checkout@v4.x.x  # Checkout the repository’s code
 
   install:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4.x.x
         with:
           node-version: '14'  # Specify Node version
 
