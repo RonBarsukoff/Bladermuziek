@@ -23,15 +23,15 @@ jobs:
         with:
           node-version: '22'  # Specify Node version
 
-      - name: Initialize npm and create package.json
+      - name: Install dependencies
         run: |
-          npm init -y  # Automatically generate package.json with default values
-
-      - name: Install TypeScript and dependencies
-        run: |
-          npm install typescript --save-dev  # Install TypeScript
-          echo "Installed dependencies:"
-          cat package.json  # Show the content of package.json
+          if [ ! -f package-lock.json ]; then
+            echo "No package-lock.json found, running npm install to generate it."
+            npm install
+          else
+            echo "package-lock.json found, running npm ci."
+            npm ci
+          fi
 
       - name: Debug file locations (After Install)
         run: |
@@ -40,7 +40,7 @@ jobs:
 
       - name: Compile TypeScript files
         run: |
-          npx tsc --pretty --noEmit --listFiles  # Compile with detailed logs
+          npx tsc --listFiles  # Compile with detailed logs
 
       - name: List all JavaScript files
         run: |
