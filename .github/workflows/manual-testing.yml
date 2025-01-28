@@ -1,12 +1,47 @@
-name: Manual Workflow Test
+name: Compile TypeScript
 
 on:
-  workflow_dispatch: # Allows manual triggering
+  pull_request:
+    branches: main
+  workflow_dispatch:  # Allows manual triggering of the workflow
 
 jobs:
-  confirm-run:
+  build-and-compile:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Confirm Run
-        run: echo "The workflow ran successfully!"
+      - name: Checkout code
+        uses: actions/checkout@v4  # Checkout the repository’s code
+
+      - name: Debug file locations (After Checkout)
+        run: |
+          echo "Listing all files in the repository after checkout:"
+          ls -R  # List all files in the repository
+          pwd  # Show current working directory
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'  # Specify Node version
+
+      - name: Install dependencies
+        run: |
+          if [ ! -f package-lock.json ]; then
+            echo "No package-lock.json found, running npm install to generate it."
+            npm install
+          else
+            echo "package-lock.json found, running npm ci."
+            npm ci
+          fi
+
+      - name: Debug file locations (After Install)
+        run: |
+          echo "Verifying repository contents before compiling:"
+          ls -R  # List all files to ensure TypeScript files are in place
+
+      - name: Compile TypeScript files
+        run: |
+          npx tsc --listFiles  # Compile with detailed logs
+
+      - name: List all JavaScript files
+        run: |
+          find . -name "*.js"  # Print all .js files in the repository
