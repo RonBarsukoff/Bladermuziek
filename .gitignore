@@ -16,5 +16,6 @@ Website/pagina.js
 Website/procs.js
 Website/volledigscherm.js
 node_modules/
+package-lock.json
 .DS_Store
 Website/.DS_Store
