@@ -8,7 +8,7 @@
             this.appendControl(this.image);
         }
 
-        public herberekenChildren() {
+        public override herberekenChildren() {
             this.image.breedte = this.breedte;
             this.image.hoogte = this.hoogte;
         }

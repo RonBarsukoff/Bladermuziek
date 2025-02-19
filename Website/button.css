@@ -1,0 +1,29 @@
+﻿.landscape, .portrait, .fullscreen, .window, .knop {
+    height: 28px;
+    width: 140px;
+    margin-top: 10px;
+    margin-left: 6px;
+    font-size: 16px;
+    background-color: lightgray;
+    border-radius: 8px;
+    text-align: center;
+    cursor: default;
+}    
+
+
+
+.landscape::after {
+    content: url('svg/landscape.svg');
+}
+
+.portrait::after {
+    content: url('svg/portrait.svg');
+}
+
+.fullscreen::after {
+    content: url('svg/fullscreen.svg');
+}
+
+.window::after {
+    content: url('svg/window.svg');
+}

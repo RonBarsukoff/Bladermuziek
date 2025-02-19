@@ -6,8 +6,6 @@
             this.owner = aOwner;
         }
 
-        protected abstract htmlElement(): HTMLElement;
-
         public appendToHtmlElement(aElement: HTMLElement) {
             aElement.appendChild(this.htmlElement());
         }

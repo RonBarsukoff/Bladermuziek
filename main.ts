@@ -55,7 +55,8 @@
         private laadLijst() {
             this.document.visible = false;
             this.lijst.visible = true;
-            this.lijst.laad();
+            this.lijst.header.laad();
+            this.lijst.regels.laad();
         }
 
         public init() {
@@ -76,11 +77,11 @@
         private handleLandscape(aSender: UIElements.Control) {
             if (this.orientatie == 'Landscape') {
                 this.orientatie = 'Portrait';
-                aSender.text = 'Landscape';
+                aSender.className = txtLandscapeClassname;
             }
             else {
                 this.orientatie = 'Landscape';
-                aSender.text = 'Portrait';
+                aSender.className = txtPortraitClassname;
             }
             if (this.orientatie == 'Landscape') {
                 document.body.style.transform = 'translate(100%, 0px) rotate(90deg)';
@@ -96,4 +97,6 @@
         }
     }
 
+    export const txtPortraitClassname = 'portrait';
+    export const txtLandscapeClassname = 'landscape';
 }

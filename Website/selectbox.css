@@ -1,0 +1,58 @@
+﻿.custom-select {
+    position: relative;
+}
+
+.select-selected {
+    margin: 0px;
+    overflow-x: hidden;
+    position: absolute;
+    padding-left: 4px;
+    height: 28px;
+    width: 100%;
+    border-radius: 8px;
+    background-color: lightgray;
+    display: inline-block;
+    cursor: default;
+}
+
+    /*style the arrow inside the select element:*/
+    .select-selected:after {
+        position: absolute;
+        content: "";
+        top: 8px;
+        right: 10px;
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-color: #fff transparent transparent transparent;
+    }
+
+    /*point the arrow upwards when the select box is open (active):*/
+    .select-selected.select-arrow-active:after {
+        border-color: transparent transparent #fff transparent;
+        top: 2px;
+    }
+
+/*style the items (options), including the selected item:*/
+.select-items div {
+    color: white;
+    padding: 4px 6px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+    position: absolute;
+    background-color: #505050;
+    top: 0px;
+    height: 600px;
+    width: 400px;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    overflow-y: scroll;
+    display: none;
+}

@@ -1,19 +1,17 @@
 ﻿namespace Data {
-    async function laadJsonObject(aUrl: string): Promise<any> {
-        let myFile = await fetch(aUrl);
-        let myContent = await myFile.text();
-        return JSON.parse(myContent);
+    async function getResponse(aUrl: string): Promise<string> {
+        let myResponse: Response = await fetch(aUrl);
+        return await myResponse.text();
     }
 
-    export async function laadLijst(aFilter: LijstFilter): Promise<any> {
+    export async function laadLijst(aFilter: LijstFilter): Promise<string> {
         let myUrl = constBasisUrl + '/?pagina=stuklijst';
         if (aFilter.album != '')
             myUrl = myUrl + '&album=' + aFilter.album;
         if (aFilter.auteur != '')
             myUrl = myUrl + '&auteur=' + aFilter.auteur;
         myUrl += '&sortorder=titel';
-        let myJsonObject = await laadJsonObject(myUrl);
-        return myJsonObject;
+        return await getResponse(myUrl);
     }
 /* offline versie
     export async function laadLijst(aFilter: LijstFilter): Promise<any> {
@@ -22,12 +20,12 @@
         return myJsonObject;
     }
 */
-    export async function laadAlbums(): Promise<any> {
-        return await laadJsonObject(constBasisUrl + '/?pagina=albumlijst');
+    export async function laadAlbums(): Promise<string> {
+        return await getResponse(constBasisUrl + '/?pagina=albumlijst');
     }
 
-    export async function laadAuteurs(): Promise<any> {
-        return await laadJsonObject(constBasisUrl + '/?pagina=auteurlijst');
+    export async function laadAuteurs(): Promise<string> {
+        return await getResponse(constBasisUrl + '/?pagina=auteurlijst');
     }
 
     export async function laadStuk(aStukId: number): Promise<any> {
