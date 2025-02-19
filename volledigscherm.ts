@@ -1,4 +1,5 @@
-﻿//let VolledigScherm = false;
+﻿const txtVolledigSchermClassname = 'fullscreen';
+const txtVensterClassname = 'window'
 
 function isInFullScreenMode(): boolean {
     return (document.fullscreenElement != null);
@@ -12,7 +13,7 @@ function ToggleFullscreen(aSender: UIElements.Control) {
         } else if (document.msExitFullscreen) { //IE11 
             document.msExitFullscreen();  
         }
-        aSender.text = 'Volledig scherm';
+        aSender.className = txtVolledigSchermClassname;
     }
     else {
         var elem = document.documentElement;
@@ -23,7 +24,7 @@ function ToggleFullscreen(aSender: UIElements.Control) {
         } else if (elem.msRequestFullscreen) { // IE11 
             elem.msRequestFullscreen(); 
         } */
-        aSender.text = 'Venster';
+        aSender.className = txtVensterClassname;
     }
     //VolledigScherm = !VolledigScherm;
 }

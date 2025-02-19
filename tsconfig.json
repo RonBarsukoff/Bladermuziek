@@ -4,7 +4,8 @@
     "module": "commonjs", /* Specify what module code is generated. */
     "outDir": "./Website",
     "forceConsistentCasingInFileNames": true,
-    "strict": true
+    "strict": true,
+    "noImplicitOverride":  true
   },
   "files": [
     "UIElements/panel.ts",

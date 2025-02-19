@@ -37,16 +37,14 @@
 
             this.bLandscapePanel = this.maakKnoppenPanel(this);
             this.bLandscape = new UIElements.Button(this.bLandscapePanel);
-            this.bLandscape.text = 'Landscape';
-            this.bLandscape.className = 'knop';
-            this.bLandscape.position = 'absolute';
+            this.bLandscape.className = txtLandscapeClassname;
+            this.bLandscape.breedte = 30;
             this.bLandscape.onclick = function (e: Event) { if (myThis.onLandscapeClicked) myThis.onLandscapeClicked(myThis.bLandscape) };
 
             this.bVolledigSchermPanel = this.maakKnoppenPanel(this);
             this.bVolledigScherm = new UIElements.Button(this.bVolledigSchermPanel);
-            this.bVolledigScherm.text = 'Volledig scherm';
-            this.bVolledigScherm.className = 'knop';
-            this.bVolledigScherm.position = 'absolute';
+            this.bVolledigScherm.className = txtVolledigSchermClassname;
+            this.bVolledigScherm.breedte = 30;
             this.bVolledigScherm.onclick = function (e: Event) { if (myThis.onVolledigSchermClicked) myThis.onVolledigSchermClicked(myThis.bVolledigScherm) };
         }
 
@@ -68,12 +66,14 @@
             let myPanel = new UIElements.Panel(aOwner);
             myPanel.align = 'start';
             myPanel.direction = 'verticaal';
-            myPanel.grootte = 180;
+            myPanel.grootte = 40;
             return myPanel;
         }
 
         public async laad() {
-            let myJsonObject = await Data.laadAlbums();
+            let myResponse = await Data.laadAlbums();
+            let myJsonObject = JSON.parse(myResponse);
+
             let myItems = myJsonObject.items;
             this.albums.clear();
             this.albums.addItems([
@@ -82,7 +82,8 @@
             this.albums.addItems(myItems, 'id', 'naam');
             this.albums.value = getCookie('GeselecteerdeAlbum');
 
-            myJsonObject = await Data.laadAuteurs();
+            myResponse = await Data.laadAuteurs();
+            myJsonObject = JSON.parse(myResponse);
             myItems = myJsonObject.items;
             this.auteurs.clear();
             this.auteurs.addItems([
@@ -94,26 +95,28 @@
 
         public updateKnoppen() {
             if (isInFullScreenMode())
-                this.bVolledigScherm.text = 'Venster';
+                this.bVolledigScherm.className = txtVensterClassname;
             else
-                this.bVolledigScherm.text = 'Volledig scherm';
+                this.bVolledigScherm.className = txtVolledigSchermClassname;
             this.albums.zetHoogteItems(this.owner.hoogte-100);
         }
 
-        public herberekenChildren() {
-            let myPanelBreedte = (this.breedte - this.bLandscapePanel.grootte - this.bVolledigSchermPanel.grootte) / 3;
+        public override herberekenChildren() {
+            let myBreedte = this.clientWidth;
+            let myPanelBreedte = (myBreedte - this.bLandscapePanel.grootte - this.bVolledigSchermPanel.grootte) / 3;
+            myPanelBreedte = Math.min(myPanelBreedte, 400);
             this.albumsPanel.grootte = myPanelBreedte;
             this.albums.breedte = myPanelBreedte-20;
             this.auteursPanel.grootte = myPanelBreedte;
             this.auteurs.breedte = myPanelBreedte - 20;
             this.eTitelPanel.grootte = myPanelBreedte;
             this.eTitel.breedte = myPanelBreedte - 20;
-            //this.bVolledigSchermPanel.grootte = myPanelBreedte;
-            //this.bLandscapePanel.grootte = myPanelBreedte;
             super.herberekenChildren();
 
-        }
-}
+        } 
+
+    }
+
     interface textinputChangedCallback { (aTextInput: UIElements.TextInput): void }
 
 }

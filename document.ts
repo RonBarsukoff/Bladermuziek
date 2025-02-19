@@ -135,14 +135,10 @@
             this.paginas.length = 0;
         }
 
-        public herberekenChildren() {
+        public override herberekenChildren() {
             let myPosite = 0;
             let myBreedte = this.clientWidth;
             let myHoogte = this.clientHeight;
-            if (this.orientatie == 'Landscape') {
-                myBreedte = this.clientHeight;
-                myHoogte = this.clientWidth;
-            }
 
             let myTeBenuttenBreedte = myBreedte;
             this.aantalPaginasOpscherm = 1;

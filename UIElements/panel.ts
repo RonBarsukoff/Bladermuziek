@@ -4,6 +4,7 @@
         private fTop: number = 0;
         protected fBreedte: number = 0;
         protected fHoogte: number = 0;
+        public updating: boolean = false;
         get left() { return this.fLeft };
         set left(aValue: number) {
             this.fLeft = aValue;
@@ -16,13 +17,13 @@
             this.panelElement.style.top = this.fTop + 'px';
         }
 
-        get breedte() { return this.fBreedte };
-        set breedte(aValue: number) {
+        override get breedte() { return this.fBreedte };
+        override set breedte(aValue: number) {
             this.fBreedte = aValue;
         }
 
-        get hoogte() { return this.fHoogte };
-        set hoogte(aValue: number) {
+        override get hoogte() { return this.fHoogte };
+        override set hoogte(aValue: number) {
             this.fHoogte = aValue;
         }
 
@@ -208,18 +209,19 @@
             this.position = 'absolute';
         }
 
-        protected herberekenParent() {
-            this.owner.herberekenChildren();
+        protected override herberekenParent() {
+            if (!this.owner.updating)
+                this.owner.herberekenChildren();
         }
-        set breedte(aValue: number) {
+        override set breedte(aValue: number) {
             this.fBreedte = aValue;
             if (this.fBreedte >= 0)
                 this.panelElement.style.width = this.fBreedte + 'px';
             else
                 console.log('fBreedte is ' + this.fBreedte);
         }
-        get breedte() { return this.fBreedte };
-        set hoogte(aValue: number) {
+        override get breedte() { return this.fBreedte };
+        override set hoogte(aValue: number) {
             this.fHoogte = aValue;
             if (this.fHoogte >= 0)
                 this.panelElement.style.height = this.fHoogte + 'px';
@@ -229,9 +231,11 @@
             if (this.aspectRatio != 0)
                 this.grootte = this.fHoogte * this.aspectRatio;
         }
-        get hoogte() { return this.fHoogte };
-        get clientWidth(): number { if (this.orientatie == 'Portrait') return this.htmlElement().clientWidth; else return this.htmlElement().clientHeight }
-        get clientHeight(): number { if (this.orientatie == 'Portrait') return this.htmlElement().clientHeight; else return this.htmlElement().clientWidth }
+        override get hoogte() { return this.fHoogte };
+        //get clientWidth(): number { if (this.orientatie == 'Portrait') return this.htmlElement().clientWidth; else return this.htmlElement().clientHeight }
+        //get clientHeight(): number { if (this.orientatie == 'Portrait') return this.htmlElement().clientHeight; else return this.htmlElement().clientWidth }
+        override get clientWidth(): number { return this.htmlElement().clientWidth }
+        override get clientHeight(): number { return this.htmlElement().clientHeight }
 
 }
 

@@ -35,6 +35,9 @@
         get breedte(): number { return this.htmlElement().clientWidth }
         set breedte(aValue: number) { this.htmlElement().style.width = aValue + 'px'; }
 
+        get hoogte(): number { return this.htmlElement().clientHeight }
+        set hoogte(aValue: number) { this.htmlElement().style.height = aValue + 'px'; }
+
         get innerText(): string { return this.htmlElement().innerHTML; }
         set innerText(aValue: string) { this.htmlElement().innerHTML = aValue; }
 

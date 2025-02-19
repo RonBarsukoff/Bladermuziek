@@ -25,15 +25,17 @@
                 setCookie('GeselecteerdeAlbum', '')
             else
                 setCookie('GeselecteerdeAlbum', aValue);
-            this.regels.laad();
+            this.regels.laad()
         }
+
         private handleAuteurChanged(aValue: string) {
             if (aValue == '')
                 setCookie('GeselecteerdeAuteur', '')
             else
                 setCookie('GeselecteerdeAuteur', aValue);
-            this.regels.laad(); 
+            this.regels.laad()
         }
+
         private handleTitelChanged(aTextInput: UIElements.TextInput) {
                 this.regels.titelFilter(aTextInput.value) 
         }
@@ -47,20 +49,25 @@
         }
 
         public async laad() {
-            let myThis = this;
-            this.removeAllPanels();
             let myAlbum = getCookie('GeselecteerdeAlbum');
             let myAuteur = getCookie('GeselecteerdeAuteur');
-            let myJsonObject = await Data.laadLijst({ auteur: myAuteur, album: myAlbum });
+            let myJson = await Data.laadLijst({ auteur: myAuteur, album: myAlbum });
+            this.vulLijst(myJson, myAuteur, myAlbum)
+        }
+
+        private vulLijst(aJsonString: string, aAuteur: string, aAlbum: string) {
+            let myJsonObject = JSON.parse(aJsonString);
+            let myThis = this;
+            this.removeAllPanels();
             let myItems = myJsonObject.items;
             for (let i = 0; i <= myItems.length - 1; i++) {
                 let myItem = myItems[i];
                 let myPanel = new LijstRegel(this, myItem.id, myItem.titel, myItem.album, myItem.auteur, myItem.aantalPaginas);
                 let myTekst = '<span class="titel">' + myItem.titel + '</span> - ';
-                if ((myAuteur == '') && (myItem.auteur))
+                if ((aAuteur == '') && (myItem.auteur))
                     myTekst += '<span class="auteur">' + myItem.auteur + '</span> - ';
                 myTekst += '<span class="aantalPaginas">(' + myItem.aantalPaginas + ')</span>';
-                if ((myAlbum == '') && (myItem.album))
+                if ((aAlbum == '') && (myItem.album))
                     myTekst += '<span class="album"> ' + myItem.album + '</span> '
                 myPanel.innerText = myTekst;
                 myPanel.onRegelClicked = function (aStukId: number) {
@@ -72,12 +79,15 @@
         }
 
         public titelFilter(aValue: string) {
+            let myRegExp = RegExp(aValue, 'i');
+            this.updating = true;
             for (let i = 0; i <= this.panels.length - 1; i++) {
                 let myRegel: LijstRegel = this.panels[i] as LijstRegel;
-                let myRegExp = RegExp(aValue, 'i');
                 var p = myRegel.titel.search(myRegExp);
                 myRegel.visible = (p >= 0);
             }
+            this.updating = false;
+            this.herberekenChildren();
         }
     }
 

@@ -14,7 +14,6 @@
         public constructor(aOwner: UIElements.RootPanel) {
             super(aOwner);
             this.align = 'end';
-            //this.grootte = 400;
             this.className = 'menu';
 
             let myThis = this;
@@ -56,8 +55,8 @@
                 e.stopPropagation();
                 myThis.visible = false;
             }
-            this.bOrientatie.className = 'knop';
-            this.bOrientatie.text = 'Landscape';
+            this.bOrientatie.breedte = 30;
+            this.bOrientatie.className = txtLandscapeClassname;
 
 
             this.bVolledigScherm = new UIElements.Button(this);
@@ -66,17 +65,17 @@
                     myThis.onVolledigSchermClicked(myThis.bVolledigScherm);
                 e.stopPropagation();
                 myThis.visible = false;
-                }
-            this.bVolledigScherm.className = 'knop';
-            this.bVolledigScherm.text = 'Volledig scherm';
+            }
+            this.bVolledigScherm.breedte = 30;
+            this.updateKnoppen();
         }
 
         public updateKnoppen() {
             if (isInFullScreenMode())
-                this.bVolledigScherm.text = 'Venster';
+                this.bVolledigScherm.className = txtVensterClassname;
             else
-                this.bVolledigScherm.text = 'Volledig scherm';
-        }
+                this.bVolledigScherm.className = txtVolledigSchermClassname;
+        } 
     }
 }
 
